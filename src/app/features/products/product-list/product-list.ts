@@ -11,4 +11,8 @@ import { ProductCardComponent } from '../../../shared/components/product-card/pr
 })
 export class ProductListComponent {
   public items = PRODUCTS;
+
+  handleCardAction(id: number): void {
+    console.log('Користувач натиснув кнопку на товарі з ID:', id);
+  }
 }
