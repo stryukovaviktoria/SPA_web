@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
 import { Product } from '../../models/product';
-import { UpperCasePipe, CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'cosm-card',
@@ -11,4 +11,10 @@ import { UpperCasePipe, CurrencyPipe, DatePipe } from '@angular/common';
 })
 export class ProductCardComponent {
   @Input({ required: true }) item!: Product;
+
+  @Output() addToCart = new EventEmitter<number>();
+
+  onBtnClick(): void {
+    this.addToCart.emit(this.item.id);
+  }
 }

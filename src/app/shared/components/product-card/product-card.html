@@ -1,13 +1,37 @@
-<div class="card">
-  <img [src]="item.imageUrl" alt="" />
+<div class="card" [class.expensive]="item.price > 400">
+  <img [src]="item.imageUrl" [alt]="item.title" class="card-image" />
 
   <h3>{{ item.title | uppercase }}</h3>
 
-  <p>{{ item.description }}</p>
+  <p class="description">{{ item.description }}</p>
 
-  <p>Price {{ item.price | currency }}</p>
+  @if (item.isDiscount) {
+    <p class="discount-badge">🔥 Акція</p>
+  }
 
-  <p>Data {{ item.createdAt | date:'dd.MM.yyyy' }}</p>
+  @switch (item.category) {
+    @case ('Makeup') {
+      <p class="category makeup"> Makeup</p>
+    }
+    @case ('Skincare') {
+      <p class="category skincare"> Skincare</p>
+    }
+    @case ('Hair') {
+      <p class="category hair"> Hair</p>
+    }
+    @default {
+      <p class="category">Інша категорія</p>
+    }
+  }
 
-  <p>Category {{ item.category }}</p>
+  <p><strong>Ціна:</strong> {{ item.price | currency:'UAH':'symbol':'1.0-0' }}</p>
+  <p><strong>Дата:</strong> {{ item.createdAt | date:'dd.MM.yyyy' }}</p>
+  <p><strong>Теги:</strong> {{ item.tags.join(', ') }}</p>
+  <p><strong>Бренд:</strong> {{ item.author?.name }}</p>
+
+  @if (item.price < 500) {
+    <button class="buy-btn" (click)="onBtnClick()">Додати в кошик</button>
+  } @else {
+    <button class="buy-btn disabled-btn" disabled>Немає в наявності</button>
+  }
 </div>

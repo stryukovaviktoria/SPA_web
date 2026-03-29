@@ -4,6 +4,10 @@ export enum ProductCategory {
   Hair = 'Hair'
 }
 
+export interface ProductAuthor {
+  name: string;
+}
+
 export interface Product {
   id: number;
   title: string;
@@ -13,4 +17,6 @@ export interface Product {
   createdAt: Date;
   category: ProductCategory;
   tags: string[];
+  isDiscount?: boolean;
+  author?: ProductAuthor;
 }

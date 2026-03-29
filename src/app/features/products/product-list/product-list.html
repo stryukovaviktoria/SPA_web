@@ -1,5 +1,8 @@
 <div class="grid">
   @for (item of items; track item.id) {
-    <cosm-card [item]="item"></cosm-card>
+    <cosm-card
+      [item]="item"
+      (addToCart)="handleCardAction($event)">
+    </cosm-card>
   }
 </div>

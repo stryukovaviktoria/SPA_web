@@ -8,6 +8,7 @@ export const PRODUCTS: Product[] = [
     imageUrl: 'https://via.placeholder.com/150',
     price: 300,
     createdAt: new Date('2024-01-01'),
+    isDiscount: true,
     category: ProductCategory.Makeup,
     tags: ['red', 'matte']
   },
@@ -18,6 +19,7 @@ export const PRODUCTS: Product[] = [
     imageUrl: 'https://via.placeholder.com/150',
     price: 500,
     createdAt: new Date('2023-12-01'),
+    isDiscount: true,
     category: ProductCategory.Skincare,
     tags: ['hydration']
   }
