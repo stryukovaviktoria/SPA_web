@@ -1,47 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from '../../../shared/components/product-card/product-card';
-import { ProductService } from '../../../shared/services/product';
+import { Observable } from 'rxjs';
 import { Product } from '../../../shared/models/product';
-
+import { ProductService } from '../../../shared/services/product';
+import { ProductCardComponent } from '../../../shared/components/product-card/product-card';
+import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'cosm-list',
   standalone: true,
-  imports: [ProductCardComponent, FormsModule],
+  imports: [ProductCardComponent, FormsModule, AsyncPipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
 })
-export class ProductListComponent implements OnInit {
-  public filteredProducts: Product[] = [];
+export class ProductListComponent {
+  public products$!: Observable<Product[]>;
+
   public searchQuery: string = '';
   public selectedCategory: string = 'All';
 
-  constructor(private productService: ProductService) {}
-
-  ngOnInit(): void {
-    this.loadProducts();
+  constructor(private productService: ProductService) {
+    this.products$ = this.productService.getAll();
   }
 
-  loadProducts(): void {
-    this.filteredProducts = this.productService.getAll();
-  }
-
-  filterItems(): void {
-    this.filteredProducts = this.productService.filterItems(
-      this.searchQuery,
-      this.selectedCategory
-    );
+  onFilterChange(): void {
+    this.productService.updateFilter({
+      query: this.searchQuery,
+      category: this.selectedCategory
+    });
   }
 
   handleCardAction(id: number): void {
     this.productService.deleteItem(id);
-    this.filterItems();
   }
 
   resetFilters(input: HTMLInputElement): void {
     this.searchQuery = '';
     this.selectedCategory = 'All';
-    this.filteredProducts = this.productService.getAll();
+
+    this.productService.updateFilter({
+      query: '',
+      category: 'All'
+    });
 
     input.value = '';
     input.focus();
