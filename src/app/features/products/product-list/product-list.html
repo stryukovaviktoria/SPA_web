@@ -1,5 +1,29 @@
+<div class="filters">
+  <input
+    #searchInput
+    type="text"
+    placeholder="Пошук..."
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="filterItems()"
+  />
+
+  <select
+    [(ngModel)]="selectedCategory"
+    (ngModelChange)="filterItems()"
+  >
+    <option value="All">Всі</option>
+    <option value="Makeup">Makeup</option>
+    <option value="Skincare">Skincare</option>
+    <option value="Hair">Hair</option>
+  </select>
+
+  <button (click)="resetFilters(searchInput)">
+    Очистити фільтри
+  </button>
+</div>
+
 <div class="grid">
-  @for (item of items; track item.id) {
+  @for (item of filteredProducts; track item.id) {
     <cosm-card
       [item]="item"
       (addToCart)="handleCardAction($event)">
