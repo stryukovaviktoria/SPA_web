@@ -1,0 +1,13 @@
+<div class="card">
+  <img [src]="item.imageUrl" alt="" />
+
+  <h3>{{ item.title | uppercase }}</h3>
+
+  <p>{{ item.description }}</p>
+
+  <p>Price {{ item.price | currency }}</p>
+
+  <p>Data {{ item.createdAt | date:'dd.MM.yyyy' }}</p>
+
+  <p>Category {{ item.category }}</p>
+</div>
