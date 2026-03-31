@@ -1,0 +1,26 @@
+@if (product$ | async; as product) {
+  <div class="details">
+    <button routerLink="/">← Назад</button>
+
+    <img [src]="product.imageUrl" />
+
+    <h2>{{ product.title | uppercase }}</h2>
+
+    <p>{{ product.description }}</p>
+
+    <p>price {{ product.price | currency }}</p>
+    <p>data {{ product.createdAt | date:'dd.MM.yyyy' }}</p>
+
+    <p>Категорія: {{ product.category }}</p>
+
+    <div>
+      @for (tag of product.tags; track tag) {
+        <span>{{ tag }}</span>
+      }
+    </div>
+
+    <p>Автор: {{ product.author?.name }}</p>
+  </div>
+} @else {
+  <p>Завантаження...</p>
+}

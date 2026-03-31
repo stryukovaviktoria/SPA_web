@@ -1,7 +1,9 @@
 <div class="card" [class.expensive]="item.price > 400">
   <img [src]="item.imageUrl" [alt]="item.title" class="card-image" />
 
-  <h3>{{ item.title | uppercase }}</h3>
+  <h3 [routerLink]="['/product', item.id]" class="details-link">
+    {{ item.title | uppercase }}
+  </h3>
 
   <p class="description">{{ item.description }}</p>
 
@@ -11,13 +13,13 @@
 
   @switch (item.category) {
     @case ('Makeup') {
-      <p class="category makeup"> Makeup</p>
+      <p class="category makeup">Makeup</p>
     }
     @case ('Skincare') {
-      <p class="category skincare"> Skincare</p>
+      <p class="category skincare">Skincare</p>
     }
     @case ('Hair') {
-      <p class="category hair"> Hair</p>
+      <p class="category hair">Hair</p>
     }
     @default {
       <p class="category">Інша категорія</p>
@@ -31,7 +33,9 @@
 
   @if (item.price < 500) {
     <button class="buy-btn" (click)="onBtnClick()">Додати в кошик</button>
+    <button class="details-btn" [routerLink]="['/product', item.id]">Детальніше</button>
   } @else {
     <button class="buy-btn disabled-btn" disabled>Немає в наявності</button>
+    <button class="details-btn" [routerLink]="['/product', item.id]">Детальніше</button>
   }
 </div>
