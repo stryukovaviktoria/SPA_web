@@ -50,7 +50,25 @@
 .hair {
   color: #7048e8;
 }
+.details-link {
+  cursor: pointer;
+  color: #d63384;
+}
 
+.details-link:hover {
+  text-decoration: underline;
+}
+
+.details-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f8b4c6;
+  color: #222;
+  cursor: pointer;
+}
 .buy-btn {
   margin-top: 12px;
   width: 100%;
