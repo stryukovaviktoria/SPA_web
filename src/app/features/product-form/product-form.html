@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <input type="text" placeholder="Назва" formControlName="title" />
+  @if (form.get('title')?.invalid && form.get('title')?.touched) {
+    <p>Помилка назви</p>
+  }
+
+  <textarea placeholder="Опис" formControlName="description"></textarea>
+
+  <input type="number" placeholder="Ціна" formControlName="price" />
+
+  <select formControlName="category">
+    <option value="Makeup">Makeup</option>
+    <option value="Skincare">Skincare</option>
+    <option value="Hair">Hair</option>
+  </select>
+
+  <input type="text" placeholder="URL зображення" formControlName="imageUrl" />
+
+  <button type="submit" [disabled]="form.invalid">
+    Додати
+  </button>
+
+</form>

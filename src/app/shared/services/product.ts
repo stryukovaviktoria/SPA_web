@@ -41,7 +41,11 @@ export class ProductService {
   getAll() {
     return this.items$;
   }
-
+addItem(newItem: Product): void {
+  const updated = [...this.items, newItem];
+  this.items = updated;
+  this.itemsSubject$.next(updated);
+}
   deleteItem(id: number): void {
     this.items = this.items.filter(item => item.id !== id);
     this.filterSubject$.next(this.filterSubject$.value);

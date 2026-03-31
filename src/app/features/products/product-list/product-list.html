@@ -21,7 +21,7 @@
     Очистити
   </button>
 </div>
-
+<button routerLink="/product/new">Додати новий</button>
 @if (products$ | async; as products) {
   <div class="grid">
     @for (item of products; track item.id) {
