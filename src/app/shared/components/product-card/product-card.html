@@ -1,29 +1,20 @@
 <div class="card" [class.expensive]="item.price > 400">
+  <div class="card" [appHighlight]="'#ffe4ec'"></div>
   <img [src]="item.imageUrl" [alt]="item.title" class="card-image" />
 
   <h3 [routerLink]="['/product', item.id]" class="details-link">
     {{ item.title | uppercase }}
   </h3>
 
-  <p class="description">{{ item.description }}</p>
-
+  <p class="description">{{ item.description | truncate:60 }}</p>
+<p
+  class="category"
+  [style.backgroundColor]="item.category | statusColor"
+>
+  {{ item.category }}
+</p>
   @if (item.isDiscount) {
     <p class="discount-badge">🔥 Акція</p>
-  }
-
-  @switch (item.category) {
-    @case ('Makeup') {
-      <p class="category makeup">Makeup</p>
-    }
-    @case ('Skincare') {
-      <p class="category skincare">Skincare</p>
-    }
-    @case ('Hair') {
-      <p class="category hair">Hair</p>
-    }
-    @default {
-      <p class="category">Інша категорія</p>
-    }
   }
 
   <p><strong>Ціна:</strong> {{ item.price | currency:'UAH':'symbol':'1.0-0' }}</p>
